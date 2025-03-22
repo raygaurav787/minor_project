@@ -10,7 +10,7 @@ from PIL import ImageTk, Image
 # Train Image
 def TrainImage(haarcasecade_path, trainimage_path, trainimagelabel_path, message,text_to_speech):
     recognizer = cv2.face.LBPHFaceRecognizer_create()
-    detector = cv2.CascadeClassifier(haarcasecade_path)
+    detector = cv2.CascadeClassifier("C:/Users/91884/Desktop/MINOR PROJECT/minn/Attendance-Management-system-using-face-recognition/haarcascade_frontalface_default.xml")
     faces, Id = getImagesAndLables(trainimage_path)
     recognizer.train(faces, np.array(Id))
     recognizer.save(trainimagelabel_path)

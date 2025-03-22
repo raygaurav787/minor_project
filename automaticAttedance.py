@@ -11,7 +11,7 @@ import time
 import tkinter.ttk as tkk
 import tkinter.font as font
 
-haarcasecade_path = "haarcascade_frontalface_default.xml"
+haarcasecade_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-System-using-face-recognition"
 trainimagelabel_path = (
     "TrainingImageLabel\\Trainner.yml"
 )
@@ -47,7 +47,8 @@ def subjectChoose(text_to_speech):
                     )
                     Notifica.place(x=20, y=250)
                     text_to_speech(e)
-                facecasCade = cv2.CascadeClassifier(haarcasecade_path)
+                facecasCade = cv2.CascadeClassifier("C:/Users/91884/Desktop/MINOR PROJECT/minn/Attendance-Management-system-using-face-recognition/haarcascade_frontalface_default.xml")
+
                 df = pd.read_csv(studentdetail_path)
                 cam = cv2.VideoCapture(0)
                 font = cv2.FONT_HERSHEY_SIMPLEX

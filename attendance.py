@@ -22,6 +22,28 @@ import automaticAttedance
 # engine.say("Please browse through your options..")
 # engine.runAndWait()
 
+import cv2
+import os
+
+# Define the correct path
+xml_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-system-using-face-recognition\haarcascade_frontalface_default.xml"
+
+# Verify if the file exists
+if not os.path.exists(xml_path):
+    print(f"❌ Error: XML file not found at {xml_path}")
+else:
+    print(f"✅ XML file found at {xml_path}")
+
+# Load the Haar Cascade
+detector = cv2.CascadeClassifier(xml_path)
+
+# Check if it's loaded correctly
+if detector.empty():
+    print("❌ Error: Failed to load Haar cascade classifier.")
+else:
+    print("✅ Haar cascade loaded successfully!")
+
+
 
 def text_to_speech(user_text):
     engine = pyttsx3.init()
@@ -29,7 +51,7 @@ def text_to_speech(user_text):
     engine.runAndWait()
 
 
-haarcasecade_path = "haarcascade_frontalface_default.xml"
+haarcasecade_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-System-using-face-recognition"
 trainimagelabel_path = (
     "./TrainingImageLabel/Trainner.yml"
 )
@@ -100,13 +122,13 @@ l1.place(x=470, y=10)
 
 
 titl = tk.Label(
-    window, text="CLASS VISION", bg="#1c1c1c", fg="yellow", font=("Verdana", 27, "bold"),
+    window, text="EI Attendance App", bg="#1c1c1c", fg="yellow", font=("Verdana", 27, "bold"),
 )
 titl.place(x=525, y=12)
 
 a = tk.Label(
     window,
-    text="Welcome to CLASS VISION",
+    text="Welcome to EI Attendance App",
     bg="#1c1c1c",  # Dark background for the main text
     fg="yellow",  # Bright yellow text color
     bd=10,
