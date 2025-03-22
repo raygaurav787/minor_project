@@ -10,7 +10,7 @@ import datetime
 import time
 import tkinter.ttk as tkk
 import tkinter.font as font
-
+#
 haarcasecade_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-System-using-face-recognition"
 trainimagelabel_path = (
     "TrainingImageLabel\\Trainner.yml"

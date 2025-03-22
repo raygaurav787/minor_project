@@ -24,7 +24,7 @@ if detector.empty():
 else:
     print("✅ Haar cascade loaded successfully!")
 
-
+#
 # Function to capture face images
 def TakeImage(l1, l2, haarcascade_path, trainimage_path, message, err_screen, text_to_speech):
     if not l1 and not l2:
