@@ -49,7 +49,7 @@ def TakeImage(l1, l2, haarcascade_path, trainimage_path, message, err_screen, te
         sampleNum = 0
         directory = f"{Enrollment}_{Name}"
         path = os.path.join(trainimage_path, directory)
-
+        print(f"Saving to directory: {path}")
         os.makedirs(path, exist_ok=True)  # Ensure directory exists
 
         while True:
@@ -60,17 +60,27 @@ def TakeImage(l1, l2, haarcascade_path, trainimage_path, message, err_screen, te
                 break
 
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(100, 100))
+            #faces = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(100, 100))
+            faces = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(50, 50))
 
             print(f"✅ Faces detected: {len(faces)}")  # Print the number of faces found
 
             for (x, y, w, h) in faces:
+                print("Face found. Attempting to save...")
                 cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 sampleNum += 1
                 img_path = os.path.join(path, f"{Name}_{Enrollment}_{sampleNum}.jpg")
                 print(f"Images saved at: {img_path}")
 
-                cv2.imwrite(img_path, gray[y:y + h, x:x + w])
+                padding = 20 
+
+                x1 = max(x - padding, 0)
+                y1 = max(y - padding, 0)
+                x2 = min(x + w + padding, gray.shape[1])
+                y2 = min(y + h + padding, gray.shape[0])
+
+                cv2.imwrite(img_path, gray[y1:y2, x1:x2])
+
 
                 cv2.imshow("Frame", img)
 
@@ -84,6 +94,7 @@ def TakeImage(l1, l2, haarcascade_path, trainimage_path, message, err_screen, te
 
         # Save student details in CSV
         csv_path = "StudentDetails/studentdetails.csv"
+        os.makedirs(os.path.dirname(csv_path), exist_ok=True)
         with open(csv_path, "a+", newline="") as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow([Enrollment, Name])

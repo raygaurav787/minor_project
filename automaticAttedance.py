@@ -10,12 +10,16 @@ import datetime
 import time
 import tkinter.ttk as tkk
 import tkinter.font as font
+import tkinter.messagebox as messagebox
+
 #
 haarcasecade_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-System-using-face-recognition"
 trainimagelabel_path = (
     "TrainingImageLabel\\Trainner.yml"
 )
-trainimage_path = "TrainingImage"
+#trainimage_path = "TrainingImage"
+trainimage_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-system-using-face-recognition\TrainingImage"
+
 studentdetail_path = (
     "StudentDetails\\studentdetails.csv"
 )
@@ -30,7 +34,7 @@ def subjectChoose(text_to_speech):
         print(future)
         if sub == "":
             t = "Please enter the subject name!!!"
-            text_to_speech(t)
+        
         else:
             try:
                 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -46,7 +50,7 @@ def subjectChoose(text_to_speech):
                         font=("times", 15, "bold"),
                     )
                     Notifica.place(x=20, y=250)
-                    text_to_speech(e)
+                    print(e)
                 facecasCade = cv2.CascadeClassifier("C:/Users/91884/Desktop/MINOR PROJECT/minn/Attendance-Management-system-using-face-recognition/haarcascade_frontalface_default.xml")
 
                 df = pd.read_csv(studentdetail_path)
@@ -145,7 +149,7 @@ def subjectChoose(text_to_speech):
                     bd=5,
                     font=("times", 15, "bold"),
                 )
-                text_to_speech(m)
+            
 
                 Notifica.place(x=20, y=250)
 
@@ -185,7 +189,7 @@ def subjectChoose(text_to_speech):
                 print(attendance)
             except:
                 f = "No Face found for attendance"
-                text_to_speech(f)
+                print(f)
                 cv2.destroyAllWindows()
 
     ###windo is frame for subject chooser
@@ -221,14 +225,16 @@ def subjectChoose(text_to_speech):
     )
 
     def Attf():
-        sub = tx.get()
-        if sub == "":
-            t = "Please enter the subject name!!!"
-            text_to_speech(t)
+     sub = tx.get()
+     if sub == "":
+        t = "Please enter the subject name!!!"
+        print(t)
+     else:
+        path = f"Attendance\\{sub}"
+        if os.path.exists(path):
+            os.startfile(path)
         else:
-            os.startfile(
-                f"Attendance\\{sub}"
-            )
+            messagebox.showerror("Error", f"No attendance file or folder found for: {sub}")
 
     attf = tk.Button(
         subject,

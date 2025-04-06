@@ -55,7 +55,9 @@ haarcasecade_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Manag
 trainimagelabel_path = (
     "./TrainingImageLabel/Trainner.yml"
 )
-trainimage_path = "/TrainingImage"
+#trainimage_path = "/TrainingImage"
+trainimage_path = r"C:\Users\91884\Desktop\MINOR PROJECT\minn\Attendance-Management-system-using-face-recognition\TrainingImage"
+
 if not os.path.exists(trainimage_path):
     os.makedirs(trainimage_path)
 

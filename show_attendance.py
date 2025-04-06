@@ -5,7 +5,7 @@ import tkinter
 import csv
 import tkinter as tk
 from tkinter import *
-#
+
 def subjectchoose(text_to_speech):
     def calculate_attendance():
         Subject = tx.get()
@@ -16,8 +16,20 @@ def subjectchoose(text_to_speech):
         filenames = glob(
             f"Attendance\\{Subject}\\{Subject}*.csv"
         )
-        df = [pd.read_csv(f) for f in filenames]
+        if not filenames:
+           t = f"No attendance records found for subject '{Subject}'."
+           text_to_speech(t)
+           return
+
+        df = [pd.read_csv(f) for f in filenames if os.path.getsize(f) > 0]  # Ensure file is not empty
+
+        if not df:
+           t = f"No readable attendance files found for subject '{Subject}'."
+           text_to_speech(t)
+           return
+
         newdf = df[0]
+
         for i in range(1, len(df)):
             newdf = newdf.merge(df[i], how="outer")
         newdf.fillna(0, inplace=True)
